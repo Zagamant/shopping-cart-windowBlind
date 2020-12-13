@@ -9,13 +9,13 @@ import CartContextProvider from './contexts/CartContext';
 
 ReactDOM.render(
     <HelmetProvider>
-      <ProductsContextProvider>
-        <CartContextProvider>
-          <Routes />
-        </CartContextProvider>
-      </ProductsContextProvider>
+        <ProductsContextProvider>
+            <CartContextProvider>
+                <Routes />
+            </CartContextProvider>
+        </ProductsContextProvider>
     </HelmetProvider>,
-  document.getElementById('root')
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
