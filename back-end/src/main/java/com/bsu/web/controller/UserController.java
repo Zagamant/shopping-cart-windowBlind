@@ -71,6 +71,14 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value="equals",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean Equals(@RequestBody UserDto user) {
+        Optional<User> userCheck = repository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        return userCheck.isPresent();
+
+    }
+
     private UserDto mapToDto(User user) {
         UserDto dto = new UserDto();
 
