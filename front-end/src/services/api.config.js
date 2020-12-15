@@ -1,68 +1,40 @@
 import axios from 'axios';
 import { TokenService } from './storage.service';
 
-const ApiService = {
-    init(baseURL) {
-        axios.defaults.baseURL = baseURL;
-    },
+class ApiService {
+    constructor(baseUrl) {
+        axios.defaults.headers.common[
+            'Authorization'
+        ] = `Bearer ${TokenService.getToken()}`;
+        axios.defaults.baseURL =
+            process.env.REACT_APP_SERVER_URL + (baseUrl || '');
+    }
 
     setHeader() {
         axios.defaults.headers.common[
             'Authorization'
         ] = `Bearer ${TokenService.getToken()}`;
-    },
+    }
 
     removeHeader() {
         axios.defaults.headers.common = {};
-    },
+    }
 
-    async get(resource) {
-        return await axios
-            .get(resource)
-            .then((resp) => {
-                console.log(resp.data);
-            })
-            .catch((err) => {
-                // Handle Error Here
-                console.error(err);
-            });
-    },
+    get(resource) {
+        return axios.get(resource);
+    }
 
-    async post(resource, data) {
-        return await axios
-            .post(resource, data)
-            .then((resp) => {
-                console.log(resp.data);
-            })
-            .catch((err) => {
-                // Handle Error Here
-                console.error(err);
-            });
-    },
+    post(resource, data) {
+        return axios.post(resource, data);
+    }
 
     put(resource, data) {
-        return axios
-            .put(resource, data)
-            .then((resp) => {
-                console.log(resp.data);
-            })
-            .catch((err) => {
-                // Handle Error Here
-                console.error(err);
-            });
-    },
+        return axios.put(resource, data);
+    }
 
     delete(resource) {
-        return axios
-            .delete(resource)
-            .then((resp) => {
-                console.log(resp.data);
-            })
-            .catch((err) => {
-                // Handle Error Here
-                console.error(err);
-            });
-    },
+        return axios.delete(resource);
+    }
 
     /**
      * Perform a custom Axios request.
@@ -77,7 +49,7 @@ const ApiService = {
      **/
     customRequest(data) {
         return axios(data);
-    },
-};
+    }
+}
 
 export default ApiService;

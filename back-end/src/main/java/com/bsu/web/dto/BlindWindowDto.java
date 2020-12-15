@@ -10,9 +10,15 @@ import java.math.BigDecimal;
 public class BlindWindowDto {
   private String id;
 
-  private String name;
+  private String model;
+
+  private int height;
+
+  private int width;
 
   private BigDecimal price;
 
   private String description;
+
+  private String photoLink;
 }

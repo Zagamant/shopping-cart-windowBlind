@@ -1,8 +1,6 @@
 import React, { createContext } from 'react';
-//import { dummyProducts } from '../services/dummy';
-//import ApiService from "../services/api.config";
 import * as PropTypes from 'prop-types';
-import axios from 'axios';
+import ProductApi from '../services/product.api';
 
 export const ProductsContext = createContext();
 
@@ -10,22 +8,19 @@ class ProductsContextProvider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            API: new ProductApi(),
             products: [],
         };
     }
 
-    componentDidMount() {
-        //ApiService.init("http://localhost:8080")
+    async componentDidMount() {
+        const { API } = this.state;
 
-        axios.get('http://localhost:8080/api/v1/windowBlinds').then(
-            (result) => {
-                console.log(result);
-                this.setState({
-                    products: result.data,
-                });
-            },
-            (error) => {}
-        );
+        const result = await API.get();
+
+        this.setState({
+            products: result || [],
+        });
     }
 
     render() {

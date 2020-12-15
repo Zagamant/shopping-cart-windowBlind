@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("api/v1/windowBlinds")
 @Validated
@@ -74,10 +74,15 @@ public class BlindWindowController {
 
   private BlindWindowDto mapToDto(WindowBlind windowBlind) {
     BlindWindowDto dto = new BlindWindowDto();
+
     dto.setId(windowBlind.getId());
-    dto.setDescription(windowBlind.getDescription());
-    dto.setName(windowBlind.getName());
+    dto.setModel(windowBlind.getModel());
+    dto.setHeight(windowBlind.getHeight());
+    dto.setWidth(windowBlind.getWidth());
     dto.setPrice(windowBlind.getPrice());
+    dto.setDescription(windowBlind.getDescription());
+    dto.setPhotoLink(windowBlind.getPhotoLink());
+
     return dto;
   }
 
@@ -87,9 +92,13 @@ public class BlindWindowController {
   }
 
   private WindowBlind mapToEntity(BlindWindowDto dto, WindowBlind entity) {
-    entity.setDescription(dto.getDescription());
-    entity.setName(dto.getName());
+    entity.setModel(dto.getModel());
+    entity.setHeight(dto.getHeight());
+    entity.setWidth(dto.getWidth());
     entity.setPrice(dto.getPrice());
+    entity.setDescription(dto.getDescription());
+    entity.setPhotoLink(dto.getPhotoLink());
+
     return entity;
   }
 }

@@ -15,9 +15,13 @@ const CartItem = ({ product }) => {
         <div className="row no-gutters py-2">
             <div className="col-sm-2 p-2">
                 <img
-                    alt={product.name}
-                    style={{ margin: '0 auto', maxHeight: '50px' }}
-                    src={product.photo}
+                    alt={product.model}
+                    style={{
+                        margin: '0 auto',
+                        Height: '50px',
+                        Width: '40px',
+                    }}
+                    src={product.photoLink}
                     className="img-fluid d-block"
                 />
             </div>

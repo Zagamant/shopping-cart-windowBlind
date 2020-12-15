@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 import { formatNumber } from '../../helpers/utils';
+import * as PropTypes from 'prop-types';
 
-const ProductItem = ({ product }) => {
+function ProductItem(props) {
+    let { product } = props;
     const { addProduct, cartItems, increase } = useContext(CartContext);
 
     const isInCart = (product) => {
@@ -16,10 +18,12 @@ const ProductItem = ({ product }) => {
                 style={{
                     display: 'block',
                     margin: '0 auto 10px',
-                    maxHeight: '200px',
+                    height: '300px',
+                    width: '300px',
+                    objectFit: 'cover',
                 }}
                 className="img-fluid"
-                src={product.photo + '?v=' + product.id}
+                src={product.photoLink + '?v=' + product.id}
                 alt=""
             />
             <p>{product.name}</p>
@@ -49,6 +53,8 @@ const ProductItem = ({ product }) => {
             </div>
         </div>
     );
-};
+}
+
+ProductItem.propTypes = { product: PropTypes.any };
 
 export default ProductItem;
