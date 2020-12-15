@@ -62,7 +62,7 @@ public class BlindWindowController {
     return ResponseEntity.ok(dto);
   }
 
-  @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity delete(@PathVariable(value = "id") String id) {
     Optional<WindowBlind> windowBlindOpt = repository.findById(id);
     if (!windowBlindOpt.isPresent()) {
