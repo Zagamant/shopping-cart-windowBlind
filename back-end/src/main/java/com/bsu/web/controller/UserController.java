@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,7 +80,6 @@ public class UserController {
     public Boolean Equals(@RequestBody UserDto user) {
         Optional<User> userCheck = repository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         return userCheck.isPresent();
-
     }
 
     private UserDto mapToDto(User user) {
