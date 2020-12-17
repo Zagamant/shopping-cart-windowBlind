@@ -1,6 +1,7 @@
 package com.bsu.web.controller;
 
 import com.bsu.entity.User;
+import com.bsu.helper.PasswordHash;
 import com.bsu.repostitory.UserRepository;
 import com.bsu.web.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.security.SecureRandom;
-import java.security.spec.KeySpec;
+import java.net.URI;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,17 +38,28 @@ public class UserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @Validated UserDto dto) {
-        User windowBlind = mapToNewEntity(dto);
-        repository.insert(windowBlind);
+    public ResponseEntity create(@RequestBody @Validated UserDto dto) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Optional<User> user = repository.findByUsername(dto.getUsername());
+        if (user.isPresent())
+            return ResponseEntity.badRequest().build();
+        dto.setPassword(PasswordHash.createHash(dto.getPassword()));
+        User newUser = mapToNewEntity(dto);
+        repository.insert(newUser);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(newUser.getId()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
+
     @RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity update(@RequestBody UserDto dto, @PathVariable(value = "id") String id) {
+    public ResponseEntity update(@RequestBody UserDto dto, @PathVariable(value = "id") String id) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Optional<User> windowBlindOpt = repository.findById(id);
         if (!windowBlindOpt.isPresent()) {
             return ResponseEntity.notFound().build();
         }
+        dto.setPassword(PasswordHash.createHash(dto.getPassword()));
         User windowBlind = windowBlindOpt.get();
         mapToEntity(dto, windowBlind);
         repository.save(windowBlind);
@@ -77,9 +89,13 @@ public class UserController {
 
     @GetMapping(value="equals",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public Boolean Equals(@RequestBody UserDto user) {
-        Optional<User> userCheck = repository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-        return userCheck.isPresent();
+    public Boolean Equals(@RequestBody UserDto user) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Optional<User> userM = repository.findByUsername(user.getUsername());
+        if (!userM.isPresent())
+            return false;
+
+        return PasswordHash.validatePassword(user.getPassword(), userM.get().getPassword());
+
     }
 
     private UserDto mapToDto(User user) {
