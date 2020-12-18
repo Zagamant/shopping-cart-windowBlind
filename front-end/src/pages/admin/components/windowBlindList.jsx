@@ -10,9 +10,6 @@ import {
     SimpleForm,
     Edit,
     Create,
-    Toolbar,
-    SaveButton,
-    DeleteButton,
 } from 'react-admin';
 
 export const WindowBlindList = (props) => (

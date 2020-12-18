@@ -14,10 +14,11 @@ function ProductItem(props) {
 
     return (
         <div className="card card-body">
+            <h2 className="text-left">{product.model}</h2>
             <img
                 style={{
                     display: 'block',
-                    margin: '0 auto 10px',
+                    margin: '0 0 10px',
                     height: '300px',
                     width: '300px',
                     objectFit: 'cover',
@@ -26,12 +27,13 @@ function ProductItem(props) {
                 src={product.photoLink + '?v=' + product.id}
                 alt=""
             />
+            <p>{product.description}</p>
             <p>{product.name}</p>
             <h3 className="text-left">{formatNumber(product.price)}</h3>
             <div className="text-right">
-                <Link to="/" className="btn btn-link btn-sm mr-2">
-                    Details
-                </Link>
+                {/*<Link to="/" className="btn btn-link btn-sm mr-2">*/}
+                {/*    Details*/}
+                {/*</Link>*/}
 
                 {isInCart(product) && (
                     <button

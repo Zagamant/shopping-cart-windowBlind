@@ -27,8 +27,6 @@ class ProductsContextProvider extends React.Component {
         let { children } = this.props;
         let { products } = this.state;
 
-        //const [products] = useState(dummyProducts);
-
         return (
             <ProductsContext.Provider value={{ products }}>
                 {children}

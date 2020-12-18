@@ -33,6 +33,7 @@ public class UserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     List<UserDto> findAll() {
+
         return repository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
@@ -87,7 +88,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value="equals",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="equals",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public Boolean Equals(@RequestBody UserDto user) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Optional<User> userM = repository.findByUsername(user.getUsername());

@@ -11,7 +11,7 @@ class ProductApi extends ApiService {
     }
 
     async post(data) {
-        const result = await super.get('', data);
+        const result = await super.post('', data);
         return result.data;
     }
 
