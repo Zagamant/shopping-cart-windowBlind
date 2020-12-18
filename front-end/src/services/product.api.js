@@ -2,7 +2,7 @@ import ApiService from './api.config';
 
 class ProductApi extends ApiService {
     constructor() {
-        super('/api/v1/windowBlinds');
+        super('/windowBlinds');
     }
 
     async get() {

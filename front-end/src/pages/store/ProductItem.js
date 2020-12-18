@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 import { formatNumber } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
@@ -13,7 +12,7 @@ function ProductItem(props) {
     };
 
     return (
-        <div className="card card-body">
+        <div className="card card-body d-flex flex-column">
             <h2 className="text-left">{product.model}</h2>
             <img
                 style={{
@@ -25,11 +24,11 @@ function ProductItem(props) {
                 }}
                 className="img-fluid"
                 src={product.photoLink + '?v=' + product.id}
-                alt=""
+                alt={product.model}
             />
             <p>{product.description}</p>
             <p>{product.name}</p>
-            <h3 className="text-left">{formatNumber(product.price)}</h3>
+            <h3 className="text-left mt-auto">{formatNumber(product.price)}</h3>
             <div className="text-right">
                 {/*<Link to="/" className="btn btn-link btn-sm mr-2">*/}
                 {/*    Details*/}
@@ -38,18 +37,18 @@ function ProductItem(props) {
                 {isInCart(product) && (
                     <button
                         onClick={() => increase(product)}
-                        className="btn btn-outline-primary btn-sm"
+                        className="btn btn-outline-primary btn-md"
                     >
-                        Add more
+                        Добавить еще
                     </button>
                 )}
 
                 {!isInCart(product) && (
                     <button
                         onClick={() => addProduct(product)}
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary btn-md"
                     >
-                        Add to cart
+                        В корзину
                     </button>
                 )}
             </div>

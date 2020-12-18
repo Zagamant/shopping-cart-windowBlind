@@ -5,12 +5,15 @@ import { GitHubIcon } from '../components/icons';
 class About extends React.Component {
     render() {
         return (
-            <Layout title="About" description="This is the About page">
+            <Layout
+                title="О нас"
+                description="На это странице вы можете посмотреть информацию о нас"
+            >
                 <div className="text-center mt-5">
-                    <h1>About</h1>
+                    <h1>О нас</h1>
                     <p>
-                        This project was built for course work{' '}
-                        <strong>in education purpose</strong> with React.
+                        Проект был выполнен в <strong>обучающих целях</strong> с
+                        помощью React.
                     </p>
 
                     <a
@@ -18,7 +21,7 @@ class About extends React.Component {
                         href="https://github.com/Zagamant/shopping-cart-windowBlind"
                     >
                         <GitHubIcon width={'18px'} />{' '}
-                        <span className="ml-2 mr-4">Visit Repo</span>
+                        <span className="ml-2 mr-4">Просмотреть код</span>
                     </a>
                 </div>
             </Layout>

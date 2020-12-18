@@ -11,13 +11,12 @@ import {
     PasswordInput,
 } from 'react-admin';
 
-export const UserComponets = (props) => (
+export const User = (props) => (
     <List {...props}>
         <Datagrid rowClick="edit">
             <TextField source="id" />
-            <TextField source="name" />
             <TextField source="username" />
-            <EmailField source="email" />
+            <EmailField source="password" />
         </Datagrid>
     </List>
 );
@@ -26,9 +25,8 @@ export const UserEdit = (props) => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
-            <TextInput source="name" />
             <TextInput source="username" />
-            <TextInput source="email" />
+            <TextInput source="password" />
         </SimpleForm>
     </Edit>
 );
@@ -36,10 +34,9 @@ export const UserEdit = (props) => (
 export const UserCreate = (props) => (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="name" />
+            <TextInput disabled source="id" />
             <TextInput source="username" />
-            <TextInput source="email" />
-            <PasswordInput source="password" />
+            <TextInput source="password" />
         </SimpleForm>
     </Create>
 );

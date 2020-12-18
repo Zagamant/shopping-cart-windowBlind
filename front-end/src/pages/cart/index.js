@@ -17,11 +17,13 @@ const Cart = () => {
     } = useContext(CartContext);
 
     return (
-        <Layout title="Cart" description="This is the Cart page">
+        <Layout title="Корзина" description="This is the Cart page">
             <div>
                 <div className="text-center mt-5">
-                    <h1>Cart</h1>
-                    <p>This is the Cart Page.</p>
+                    <h1>Корзина</h1>
+                    <p>
+                        Тут вы можете доваить или удалить эелементы для заказа.
+                    </p>
                 </div>
 
                 <div className="row no-gutters justify-content-center">
@@ -30,18 +32,18 @@ const Cart = () => {
                             <CartProducts />
                         ) : (
                             <div className="p-3 text-center text-muted">
-                                Your cart is empty
+                                Ваша карзина пуста :(
                             </div>
                         )}
 
                         {checkout && (
                             <div className="p-3 text-center text-success">
-                                <p>Checkout successfull</p>
+                                <p>Заказ оформлен</p>
                                 <Link
                                     to="/"
                                     className="btn btn-outline-success btn-sm"
                                 >
-                                    BUY MORE
+                                    Продолжить покупки
                                 </Link>
                             </div>
                         )}
@@ -49,9 +51,9 @@ const Cart = () => {
                     {cartItems.length > 0 && (
                         <div className="col-sm-3 p-3">
                             <div className="card card-body">
-                                <p className="mb-1">Total Items</p>
+                                <p className="mb-1">Всего товаров</p>
                                 <h4 className=" mb-3 txt-right">{itemCount}</h4>
-                                <p className="mb-1">Total Payment</p>
+                                <p className="mb-1">Итог к оплате</p>
                                 <h3 className="m-0 txt-right">
                                     {formatNumber(total)}
                                 </h3>
@@ -62,14 +64,14 @@ const Cart = () => {
                                         className="btn btn-primary mb-2"
                                         onClick={handleCheckout}
                                     >
-                                        CHECKOUT
+                                        Оплатить
                                     </button>
                                     <button
                                         type="button"
                                         className="btn btn-outlineprimary btn-sm"
                                         onClick={clearCart}
                                     >
-                                        CLEAR
+                                        Очистить
                                     </button>
                                 </div>
                             </div>

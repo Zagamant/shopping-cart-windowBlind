@@ -1,10 +1,6 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
-import {
-    UserCreate,
-    UserEdit,
-    UserComponets,
-} from './components/userComponets';
+import { UserCreate, UserEdit, User } from './components/user';
 import {
     WindowBlindCreate,
     WindowBlindEdit,
@@ -12,9 +8,8 @@ import {
 } from './components/windowBlindList';
 import CustomDataProvider from './components/CustomDataProvider';
 import CustomAuthProvider from './components/CustomAuthProvider';
-import authTest from './components/authTest';
 
-let dataProvider = CustomDataProvider('http://localhost:8080/api/v1');
+let dataProvider = CustomDataProvider(process.env.REACT_APP_SERVER_URL);
 
 class AdminPage extends React.Component {
     render() {
@@ -32,7 +27,7 @@ class AdminPage extends React.Component {
                 />
                 <Resource
                     name="users"
-                    list={UserComponets}
+                    list={User}
                     edit={UserEdit}
                     create={UserCreate}
                 />

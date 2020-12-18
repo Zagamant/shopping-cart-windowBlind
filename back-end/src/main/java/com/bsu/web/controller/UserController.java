@@ -26,8 +26,14 @@ public class UserController {
     private final UserRepository repository;
 
     @Autowired
-    public UserController(UserRepository repository) {
+    public UserController(UserRepository repository) throws InvalidKeySpecException, NoSuchAlgorithmException {
         this.repository = repository;
+        User firstAdmin = new User();
+        firstAdmin.setUsername("admin");
+        firstAdmin.setPassword(PasswordHash.createHash("admin"));
+        repository.insert(firstAdmin);
+
+
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

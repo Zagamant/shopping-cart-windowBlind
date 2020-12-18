@@ -8,13 +8,12 @@ class ProductsContextProvider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            API: new ProductApi(),
             products: [],
         };
     }
 
     async componentDidMount() {
-        const { API } = this.state;
+        const API = new ProductApi();
 
         const result = await API.get();
 
@@ -34,7 +33,5 @@ class ProductsContextProvider extends React.Component {
         );
     }
 }
-
 ProductsContextProvider.propTypes = { children: PropTypes.any };
-
 export default ProductsContextProvider;

@@ -2,7 +2,7 @@ import ApiService from './api.config';
 
 class UserApi extends ApiService {
     constructor() {
-        super('/api/v1/users');
+        super('/users');
     }
 
     async get() {
@@ -11,7 +11,7 @@ class UserApi extends ApiService {
         return result.data;
     }
 
-    async get(id) {
+    async getById(id) {
         const result = await super.get({ id });
         return result.data;
     }
