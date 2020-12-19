@@ -35,12 +35,8 @@ public class CORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "*");
         response.setHeader("Access-Control-Expose-Headers", "*");
 
-        if (OPTIONS_METHOD.equalsIgnoreCase(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
-
-        } else {
-            chain.doFilter(req, res);
-        }
+        if (OPTIONS_METHOD.equalsIgnoreCase(request.getMethod())) response.setStatus(HttpServletResponse.SC_OK);
+        else chain.doFilter(req, res);
     }
 
     @Override

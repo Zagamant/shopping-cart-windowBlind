@@ -8,6 +8,7 @@ import {
 } from './components/windowBlindList';
 import CustomDataProvider from './components/CustomDataProvider';
 import CustomAuthProvider from './components/CustomAuthProvider';
+import CustomDataProvider2 from './components/CDP2';
 
 let dataProvider = CustomDataProvider(process.env.REACT_APP_SERVER_URL);
 

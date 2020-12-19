@@ -28,18 +28,17 @@ public class UserController {
     @Autowired
     public UserController(UserRepository repository) throws InvalidKeySpecException, NoSuchAlgorithmException {
         this.repository = repository;
+        if(repository.findByUsername("admin").isPresent())
+            return;
         User firstAdmin = new User();
         firstAdmin.setUsername("admin");
         firstAdmin.setPassword(PasswordHash.createHash("admin"));
         repository.insert(firstAdmin);
-
-
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     List<UserDto> findAll() {
-
         return repository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
     }
 

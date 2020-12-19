@@ -38,9 +38,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 url = `${apiUrl}/${resource}?page=${page}&pageSize=${perPage}`;
                 break;
             }
-            case GET_ONE:
+            case GET_ONE: {
                 url = `${apiUrl}/${resource}/${params.id}`;
                 break;
+            }
             case GET_MANY: {
                 JSON.stringify({ id: params.ids });
                 let idStr = '';
